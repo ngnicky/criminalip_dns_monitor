@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Criminal IP를 이용한 도메인 보안 정보 조회</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container mt-3">
+		<h1>Criminal IP를 이용한 도메인 보안 정보 조회</h1>
+		<form method="POST">
+			<div class="form-group">
+				<label for="domain">도메인:</label>
+				<input type="text" class="form-control" name="domain" id="domain" required>
+			</div>
+			<button type="submit" class="btn btn-primary">즐겨찾기 추가</button>
+		</form>
+		{% if data %}
+			<table class="table table-striped mt-3">
+				<thead>
+					<tr>
+						<th>도메인</th>
+						<th>점수</th>
+						<th>등록 일자</th>
+						<th>스캔 ID</th>
+						<th>연결된 IP 주소 수</th>
+						<th>사용된 기술</th>
+						<th>국가</th>
+						<th>이슈</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in data %}
+						<tr>
+							<td>{{ item["title"] }} ({{ item["url"] }})</td>
+							<td>{{ item["score"] }}</td>
+							<td>{{ item["reg_dtime"] }}</td>
+							<td>{{ item["scan_id"] }}</td>
+							<td>{{ item["connected_ip_cnt"] }}</td>
+							<td>{% for tech in item["technologies"] %}{{ tech }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+							<td>{% for country in item["countries"] %}{{ country }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+							<td>{% for issue in item["issues"] %}{{ issue }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endif %}
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
