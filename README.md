@@ -12,12 +12,5 @@ This is a Python Flask web application that allows users to save and retrieve do
 - Basic understanding of Flask and web development concepts.
 - An API key from [criminalip.io](https://criminalip.io/) to access domain reports.
 
-## Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone <repository_url>
-   cd <repository_folder>
 
 
